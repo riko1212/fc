@@ -26,7 +26,7 @@ export default function Form({ onAddSum, onAddItems }) {
     setDate(Date.now());
   }
   return (
-    <form className="form test" onSubmit={handleSubmit}>
+    <form className="form" onSubmit={handleSubmit}>
       <div className="input-wrap">
         <input
           type="text"
