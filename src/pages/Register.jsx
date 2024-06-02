@@ -1,7 +1,9 @@
-// import React from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function Register() {
+  const [errorMessage, setErrorMessage] = useState('');
+
   const handleRegister = (e) => {
     e.preventDefault();
 
@@ -9,16 +11,27 @@ function Register() {
     const password = e.target.elements['login-pass'].value;
     const repeatPassword = e.target.elements['login-pass-repeat'].value;
 
-    const users = JSON.parse(localStorage.getItem('users')) || [];
+    // Перевірка наявності пароля перед порівнянням з повторним паролем
+    if (!password) {
+      setErrorMessage('Please enter a password');
+      return;
+    }
 
-    const existingUser = users.find((user) => user.name === name);
-    if (existingUser) {
-      alert("Користувач з таким ім'ям вже існує");
+    if (password.length < 8) {
+      setErrorMessage('Password must be at least 8 characters long');
       return;
     }
 
     if (password !== repeatPassword) {
-      alert('Паролі не співпадають');
+      setErrorMessage('Passwords do not match');
+      return;
+    }
+
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+
+    const existingUser = users.find((user) => user.name === name);
+    if (existingUser) {
+      setErrorMessage('User with this name already exists');
       return;
     }
 
@@ -33,6 +46,7 @@ function Register() {
     <div className="login-wrapper">
       <div className="login-block">
         <p className="login-text">Register</p>
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
         <form className="login-form" onSubmit={handleRegister}>
           <input
             type="text"
