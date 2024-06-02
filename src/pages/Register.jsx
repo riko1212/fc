@@ -57,7 +57,7 @@ function Register() {
           <input
             type="password"
             name="login-pass"
-            className="form-input"
+            className="form-input test"
             placeholder="Enter password"
             required
           />
