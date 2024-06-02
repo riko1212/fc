@@ -6,6 +6,7 @@
 
 body {
   margin: 0;
+  padding: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -64,10 +65,12 @@ address {
   background-color: #a8dba8;
   border: none;
   font-weight: bold;
-  transition-duration: 300ms  ;
+  transition-duration: 300ms;
 }
 
-.btn:hover, .btn:active, .btn:focus {
+.btn:hover,
+.btn:active,
+.btn:focus {
   background-color: #79bd9a;
 }
 
@@ -383,7 +386,6 @@ address {
   color: #3b8686;
 }
 
-
 .login-wrapper {
   width: 100vw;
   height: 100vh;
@@ -418,7 +420,7 @@ address {
 }
 
 .login-link {
-  color: #cff09e
+  color: #cff09e;
 }
 
 .error-page-text {
@@ -433,9 +435,9 @@ address {
 }
 
 .error-page-link {
-position: absolute;
-top: 50px;
-left: 50px;
-text-decoration: underline;
-color: #3b8686;
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  text-decoration: underline;
+  color: #3b8686;
 }
