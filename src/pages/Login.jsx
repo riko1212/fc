@@ -11,7 +11,7 @@ function Login() {
     );
     if (foundUser) {
       localStorage.setItem('loggedInUser', JSON.stringify(foundUser));
-      window.location.href = '/#/main';
+      window.location.href = 'fc/#/main';
     } else {
       alert("Неправильне ім'я користувача або пароль");
     }
