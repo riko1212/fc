@@ -1,15 +1,15 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 Form.propTypes = {
   onAddSum: PropTypes.func,
   onAddItems: PropTypes.func,
-}
+};
 
 export default function Form({ onAddSum, onAddItems }) {
   const [income, setIncome] = useState('');
   const [topic, setTopic] = useState('');
-  const [date, setDate] = useState(Date.now());
+  const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -23,8 +23,9 @@ export default function Form({ onAddSum, onAddItems }) {
 
     setIncome('');
     setTopic('');
-    setDate(Date.now());
+    setDate(new Date().toISOString().slice(0, 10));
   }
+
   return (
     <form className="form" onSubmit={handleSubmit}>
       <div className="input-wrap">
@@ -45,11 +46,10 @@ export default function Form({ onAddSum, onAddItems }) {
           onChange={(e) => setIncome(e.target.value)}
         />
         <input
-          type="text"
+          type="date"
           name="user-date"
           className="form-input"
-          placeholder="Enter date"
-          value={new Date(date).toLocaleDateString('uk-UA')}
+          value={date}
           onChange={(e) => setDate(e.target.value)}
         />
       </div>

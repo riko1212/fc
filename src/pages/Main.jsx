@@ -36,7 +36,7 @@ export default function Main() {
 
   const [isModalClose, setisModalClose] = useState(true);
   const [itemIdToDelete, setItemIdToDelete] = useState(null);
-  const [itemIdToUpdate, setitemIdToUpdate] = useState(null);
+  // const [itemIdToUpdate, setitemIdToUpdate] = useState(null);
   // const [itemToUpdate, setitemToUpdate] = useState({});
 
   function handleModalCloseClick() {
@@ -66,11 +66,11 @@ export default function Main() {
     setisModalClose(false);
   }
 
-  function handleUpdateItem(id) {
-    setitemIdToUpdate(id);
-    console.log(itemIdToUpdate);
+  function handleUpdateItem() {
+    // setitemIdToUpdate(id);
+    // console.log(itemIdToUpdate);
     // setitemToUpdate(items.find((item) => item.id === itemIdToUpdate));
-    setisModalClose(false);
+    // setisModalClose(false);
   }
 
   // function handleConfirmUpdate() {

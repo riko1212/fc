@@ -37,10 +37,14 @@ export default function InfoList({
       sortedItems = items.slice().sort((a, b) => a.income - b.income);
       break;
     case 'first':
-      sortedItems = items.slice().sort((a, b) => a.date - b.date);
+      sortedItems = items
+        .slice()
+        .sort((a, b) => new Date(a.date) - new Date(b.date));
       break;
     case 'last':
-      sortedItems = items.slice().sort((a, b) => b.date - a.date);
+      sortedItems = items
+        .slice()
+        .sort((a, b) => new Date(b.date) - new Date(a.date));
       break;
     default:
       sortedItems = items;
