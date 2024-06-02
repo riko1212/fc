@@ -144,7 +144,7 @@ export default function Main() {
       </div>
       <Footer />
       <DeleteModal
-        onModalClose={handleDeleteModalCloseClick}
+        onDeleteModalClose={handleDeleteModalCloseClick}
         isDeleteModalClose={isDeleteModalClose}
         onItemDelete={handleConfirmDelete}
       />
@@ -156,7 +156,7 @@ export default function Main() {
         itemToUpdate={itemToUpdate}
       /> */}
       <ClearModal
-        onModalClose={handleClearModalCloseClick}
+        onClearModalClose={handleClearModalCloseClick}
         isClearModalClose={isClearModalClose}
         onClearList={handleClearList}
       />
