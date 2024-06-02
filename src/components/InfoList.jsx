@@ -1,23 +1,20 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types'
-
-
+import PropTypes from 'prop-types';
 import InfoItem from './InfoItem';
 
 InfoList.propTypes = {
-  onDeleteModalOpen: PropTypes.func,
-  onDeleteItemId: PropTypes.func,
-  onUpdateItemData: PropTypes.func,
-  onClearModal: PropTypes.func,
+  onDeleteModalOpen: PropTypes.func.isRequired,
+  onDeleteItemId: PropTypes.func.isRequired,
+  onUpdateItemData: PropTypes.func.isRequired,
+  onClearModal: PropTypes.func.isRequired,
   handleClearList: PropTypes.func,
-  items: PropTypes.array,
-  isModalClose: PropTypes.bool,
-}
+  items: PropTypes.array.isRequired,
+  isModalClose: PropTypes.bool.isRequired,
+};
 
 export default function InfoList({
   items,
   onDeleteModalOpen,
-  // handleClearList,
   isModalClose,
   onDeleteItemId,
   onUpdateItemData,
@@ -33,10 +30,10 @@ export default function InfoList({
         .slice()
         .sort((a, b) => a.topic.localeCompare(b.topic));
       break;
-    case 'hight':
+    case 'highest':
       sortedItems = items.slice().sort((a, b) => b.income - a.income);
       break;
-    case 'low':
+    case 'lowest':
       sortedItems = items.slice().sort((a, b) => a.income - b.income);
       break;
     case 'first':
@@ -52,7 +49,7 @@ export default function InfoList({
   return (
     <>
       <ul className="info-list">
-        {sortedItems && sortedItems.map((item) => (
+        {sortedItems.map((item) => (
           <InfoItem
             item={item}
             key={item.id}
@@ -75,8 +72,8 @@ export default function InfoList({
             onChange={(e) => setSortBy(e.target.value)}
           >
             <option value="order">order</option>
-            <option value="hight">from hight</option>
-            <option value="low">from low</option>
+            <option value="highest">from highest</option>
+            <option value="lowest">from lowest</option>
             <option value="description">description</option>
             <option value="first">from first</option>
             <option value="last">from last</option>

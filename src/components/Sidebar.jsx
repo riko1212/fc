@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 Sidebar.propTypes = {
   children: PropTypes.object,
+  onCategorySelect: PropTypes.func,
 };
 
 const LOCAL_STORAGE_KEY = 'categories';
@@ -18,7 +19,7 @@ const topicList = [
   { id: 6, name: 'Health' },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({ onCategorySelect }) {
   const [categories, setCategories] = useState(() => {
     const storedCategories = localStorage.getItem(LOCAL_STORAGE_KEY);
     return storedCategories ? JSON.parse(storedCategories) : topicList;
@@ -44,9 +45,17 @@ export default function Sidebar() {
       prevCategories.filter((category) => category.id !== categoryToDelete.id)
     );
   }
+
+  function handleCategorySelect(category) {
+    onCategorySelect(category);
+  }
   return (
     <aside className="sidebar">
-      <TopicList categories={categories} onDelete={handleDeleteCategory} />
+      <TopicList
+        categories={categories}
+        onDelete={handleDeleteCategory}
+        onSelect={handleCategorySelect}
+      />
       {showAddCategory && <FormAddCategory onAddCategory={handleAddCategory} />}
       <button
         onClick={handleShowAddCategory}

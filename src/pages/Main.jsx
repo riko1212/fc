@@ -54,7 +54,7 @@ export default function Main() {
   }
 
   function handleAddItems(item) {
-    setItems((items) => [item, ...items])
+    setItems((items) => [item, ...items]);
   }
 
   function handleDeleteItem(id) {
