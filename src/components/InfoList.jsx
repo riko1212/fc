@@ -9,15 +9,15 @@ InfoList.propTypes = {
   onClearModal: PropTypes.func.isRequired,
   handleClearList: PropTypes.func,
   items: PropTypes.array.isRequired,
-  isModalClose: PropTypes.bool.isRequired,
+  isDeleteModalClose: PropTypes.bool.isRequired,
+  isClearModalClose: PropTypes.bool.isRequired,
 };
 
 export default function InfoList({
   items,
   onDeleteModalOpen,
-  isModalClose,
+  isDeleteModalClose,
   onDeleteItemId,
-  onUpdateItemData,
   onClearModal,
 }) {
   const [sortBy, setSortBy] = useState('order');
@@ -58,9 +58,8 @@ export default function InfoList({
             item={item}
             key={item.id}
             onDeleteModalOpen={onDeleteModalOpen}
-            isModalClose={isModalClose}
+            isDeleteModalClose={isDeleteModalClose}
             onDeleteItemId={onDeleteItemId}
-            onUpdateItemData={onUpdateItemData}
           />
         ))}
       </ul>

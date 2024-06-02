@@ -34,16 +34,24 @@ export default function Main() {
 
   // const [items, setItems] = useState([]);
 
-  const [isModalClose, setisModalClose] = useState(true);
+  const [isDeleteModalClose, setIsDeleteModalClose] = useState(true);
+  const [isClearModalClose, setIsClearModalClose] = useState(true);
   const [itemIdToDelete, setItemIdToDelete] = useState(null);
   // const [itemIdToUpdate, setitemIdToUpdate] = useState(null);
   // const [itemToUpdate, setitemToUpdate] = useState({});
 
-  function handleModalCloseClick() {
+  function handleDeleteModalCloseClick() {
     if (items.length === 0) {
       return;
     }
-    setisModalClose(!isModalClose);
+    setIsDeleteModalClose(!isDeleteModalClose);
+  }
+
+  function handleClearModalCloseClick() {
+    if (items.length === 0) {
+      return;
+    }
+    setIsClearModalClose(!isClearModalClose);
   }
 
   function handleChangeSum(data) {
@@ -59,11 +67,11 @@ export default function Main() {
 
   function handleDeleteItem(id) {
     setItemIdToDelete(id);
-    setisModalClose(false);
+    setIsDeleteModalClose(false);
   }
 
   function handleClearModal() {
-    setisModalClose(false);
+    setIsClearModalClose(false);
   }
 
   function handleUpdateItem() {
@@ -86,13 +94,13 @@ export default function Main() {
           return total + Number(amount.income);
         }, 0)
     );
-    setisModalClose(true);
+    setIsDeleteModalClose(true);
   }
 
   function handleClearList() {
     setItems([]);
     setSum(0);
-    setisModalClose(true);
+    setIsClearModalClose(true);
   }
 
   useEffect(
@@ -123,8 +131,9 @@ export default function Main() {
               <InfoList
                 items={items}
                 onDeleteItem={handleConfirmDelete}
-                onDeleteModalOpen={handleModalCloseClick}
-                isModalClose={isModalClose}
+                onDeleteModalOpen={handleDeleteModalCloseClick}
+                isDeleteModalClose={isDeleteModalClose}
+                isClearModalClose={isClearModalClose}
                 onDeleteItemId={handleDeleteItem}
                 onUpdateItemData={handleUpdateItem}
                 onClearModal={handleClearModal}
@@ -135,8 +144,8 @@ export default function Main() {
       </div>
       <Footer />
       <DeleteModal
-        onModalClose={handleModalCloseClick}
-        isModalClose={isModalClose}
+        onModalClose={handleDeleteModalCloseClick}
+        isDeleteModalClose={isDeleteModalClose}
         onItemDelete={handleConfirmDelete}
       />
 
@@ -147,8 +156,8 @@ export default function Main() {
         itemToUpdate={itemToUpdate}
       /> */}
       <ClearModal
-        onModalClose={handleModalCloseClick}
-        isModalClose={isModalClose}
+        onModalClose={handleClearModalCloseClick}
+        isClearModalClose={isClearModalClose}
         onClearList={handleClearList}
       />
     </>

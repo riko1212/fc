@@ -1,22 +1,22 @@
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 CleareModal.propTypes = {
-  onModalClose: PropTypes.func,
+  onClearModalClose: PropTypes.func,
   onClearList: PropTypes.func,
-  isModalClose: PropTypes.bool,
-}
+  isClearModalClose: PropTypes.bool,
+};
 export default function CleareModal({
-  onModalClose,
-  isModalClose,
+  onClearModalClose,
+  isClearModalClose,
   onClearList,
 }) {
   return (
-    <div className={isModalClose ? 'backdrop clicked' : 'backdrop'}>
+    <div className={isClearModalClose ? 'backdrop clicked' : 'backdrop'}>
       <div className="modal delete-modal ">
         <button
           type="button"
           className="modal-close-btn"
-          onClick={onModalClose}
+          onClick={onClearModalClose}
         >
           X
         </button>
@@ -25,7 +25,7 @@ export default function CleareModal({
           <button type="button" className="btn" onClick={onClearList}>
             Yep
           </button>
-          <button type="button" className="btn" onClick={onModalClose}>
+          <button type="button" className="btn" onClick={onClearModalClose}>
             Nope
           </button>
         </div>

@@ -1,25 +1,24 @@
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 DeleteModal.propTypes = {
-  onModalClose: PropTypes.func,
-  onUpdateList: PropTypes.func,
+  onDeleteModalClose: PropTypes.func,
   onItemDelete: PropTypes.func,
-  isModalClose: PropTypes.bool,
-}
+  isDeleteModalClose: PropTypes.bool,
+};
 
 export default function DeleteModal({
-  onModalClose,
-  isModalClose,
+  onDeleteModalClose,
+  isDeleteModalClose,
   onItemDelete,
   // onUpdateList,
 }) {
   return (
-    <div className={isModalClose ? 'backdrop clicked' : 'backdrop'}>
+    <div className={isDeleteModalClose ? 'backdrop clicked' : 'backdrop'}>
       <div className="modal delete-modal ">
         <button
           type="button"
           className="modal-close-btn"
-          onClick={onModalClose}
+          onClick={onDeleteModalClose}
         >
           X
         </button>
@@ -28,7 +27,7 @@ export default function DeleteModal({
           <button type="button" className="btn" onClick={onItemDelete}>
             Yep
           </button>
-          <button type="button" className="btn" onClick={onModalClose}>
+          <button type="button" className="btn" onClick={onDeleteModalClose}>
             Nope
           </button>
         </div>

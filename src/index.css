@@ -235,6 +235,7 @@ address {
 }
 
 .form-input {
+  font-family: inherit;
   width: 50%;
   height: 50px;
   background-color: transparent;
