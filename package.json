@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://riko1212.github.io/fc",
+  "homepage": "https://riko1212.github.io/fc/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
