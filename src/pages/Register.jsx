@@ -38,7 +38,7 @@ function Register() {
     users.push(newUser);
     localStorage.setItem('users', JSON.stringify(users));
 
-    window.location.href = '/#/';
+    window.location.href = '/';
   };
 
   return (
