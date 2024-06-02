@@ -1,36 +1,61 @@
-import { Link } from "react-router-dom"
+// import React from 'react';
+import { Link } from 'react-router-dom';
 
-function Login () {
+function Login() {
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const name = e.target.elements['login-name'].value;
+    const password = e.target.elements['login-pass'].value;
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const foundUser = users.find(
+      (user) => user.name === name && user.password === password
+    );
+    if (foundUser) {
+      // Збереження імені користувача після успішного входу
+      localStorage.setItem('loggedInUser', JSON.stringify(foundUser));
+      // Перенаправлення на головну сторінку після входу
+      window.location.href = '/#/main';
+    } else {
+      alert("Неправильне ім'я користувача або пароль");
+    }
+  };
+
   return (
     <div className="login-wrapper">
       <div className="login-block">
         <p className="login-text">Login</p>
-        <form className="login-form">
-        <input
-          type="text"
-          name="login-name"
-          className="form-input"
-          placeholder="Enter name"
-        />
-        <input
-          type="password"
-          name="login-pass"
-          className="form-input"
-          placeholder="Enter password"
-        />
-        <Link to="/main" className="btn form-btn login-btn">Login</Link>
+        <form className="login-form" onSubmit={handleLogin}>
+          <input
+            type="text"
+            name="login-name"
+            className="form-input"
+            placeholder="Enter name"
+          />
+          <input
+            type="password"
+            name="login-pass"
+            className="form-input"
+            placeholder="Enter password"
+          />
+          <button type="submit" className="btn form-btn login-btn">
+            Login
+          </button>
         </form>
         <ul className="login-actions">
           <li>
-            <Link className="login-link" to="/register">Register?</Link>
+            <Link className="login-link" to="/register">
+              Register?
+            </Link>
           </li>
           <li>
-            <Link className="login-link" to="/restore-pass">Forgot Password?</Link>
+            <Link className="login-link" to="/restore-pass">
+              Forgot Password?
+            </Link>
           </li>
         </ul>
-      </div>  
+      </div>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;

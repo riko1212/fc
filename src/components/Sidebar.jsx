@@ -1,12 +1,13 @@
 import FormAddCategory from './FormAddCategory';
 import TopicList from './TopicList';
-import { useState } from 'react';
-import PropTypes from 'prop-types'
-
+import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 Sidebar.propTypes = {
   children: PropTypes.object,
-}
+};
+
+const LOCAL_STORAGE_KEY = 'categories';
 
 const topicList = [
   { id: 1, name: 'House' },
@@ -18,19 +19,34 @@ const topicList = [
 ];
 
 export default function Sidebar() {
+  const [categories, setCategories] = useState(() => {
+    const storedCategories = localStorage.getItem(LOCAL_STORAGE_KEY);
+    return storedCategories ? JSON.parse(storedCategories) : topicList;
+  });
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(categories));
+  }, [categories]);
+
   const [showAddCategory, setShowAddCategory] = useState(false);
-  const [categories, setCategories] = useState(topicList);
+
   function handleShowAddCategory() {
     setShowAddCategory((show) => !show);
   }
 
   function handleAddCategory(category) {
-    setCategories((categories) => [...categories, category]);
+    setCategories((prevCategories) => [...prevCategories, category]);
     setShowAddCategory(false);
+  }
+
+  function handleDeleteCategory(categoryToDelete) {
+    setCategories((prevCategories) =>
+      prevCategories.filter((category) => category.id !== categoryToDelete.id)
+    );
   }
   return (
     <aside className="sidebar">
-      <TopicList categories={categories} />
+      <TopicList categories={categories} onDelete={handleDeleteCategory} />
       {showAddCategory && <FormAddCategory onAddCategory={handleAddCategory} />}
       <button
         onClick={handleShowAddCategory}

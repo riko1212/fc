@@ -2,7 +2,7 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="container footer-container">
-        <a href="#" className="footer-logo">
+        <a href="/#/main" className="footer-logo">
           Logo
         </a>
         <ul className="contacts-list">

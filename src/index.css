@@ -96,9 +96,19 @@ address {
   align-items: center;
 }
 
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
 .menu-list {
   display: flex;
   gap: 24px;
+}
+
+.logout-btn {
+  background-color: #79bd9a;
 }
 
 .sidebar {
@@ -119,6 +129,19 @@ address {
   font-weight: bold;
   border-radius: 5px;
   transition-duration: 300ms;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sidebar-item-delete {
+  background-color: transparent;
+  border: none;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 0;
+  transform: rotate(45deg);
+  color: #3b8686;
+  padding: 0;
 }
 
 .sidebar-link:is(:hover, :focus) {
