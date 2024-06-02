@@ -13,7 +13,7 @@ function Login() {
     );
     if (foundUser) {
       localStorage.setItem('loggedInUser', JSON.stringify(foundUser));
-      navigate.push('/main');
+      navigate('/main');
     } else {
       alert("Неправильне ім'я користувача або пароль");
     }
