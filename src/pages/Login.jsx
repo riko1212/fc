@@ -1,4 +1,3 @@
-// import React from 'react';
 import { Link } from 'react-router-dom';
 
 function Login() {
@@ -11,9 +10,7 @@ function Login() {
       (user) => user.name === name && user.password === password
     );
     if (foundUser) {
-      // Збереження імені користувача після успішного входу
       localStorage.setItem('loggedInUser', JSON.stringify(foundUser));
-      // Перенаправлення на головну сторінку після входу
       window.location.href = '/#/main';
     } else {
       alert("Неправильне ім'я користувача або пароль");

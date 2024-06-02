@@ -7,7 +7,7 @@ TopicItem.propTypes = {
 
 export default function TopicItem({ item, onDelete }) {
   const handleDelete = () => {
-    onDelete(item); // Викликаємо функцію видалення з переданим об'єктом
+    onDelete(item);
   };
   return (
     <li className="sidebar-item">

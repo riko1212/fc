@@ -11,7 +11,6 @@ function Register() {
     const password = e.target.elements['login-pass'].value;
     const repeatPassword = e.target.elements['login-pass-repeat'].value;
 
-    // Перевірка наявності пароля перед порівнянням з повторним паролем
     if (!password) {
       setErrorMessage('Please enter a password');
       return;
