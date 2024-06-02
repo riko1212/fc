@@ -4,7 +4,7 @@ export default function Header() {
   const userName = JSON.parse(user);
 
   const handleLogout = () => {
-    window.location.href = '/';
+    window.location.href = '/fc';
   };
   return (
     <header className="header">
