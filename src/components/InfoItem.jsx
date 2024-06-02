@@ -40,7 +40,6 @@ export default function InfoItem({ onDeleteItemId, item, onUpdateItemData }) {
 
   useEffect(() => {
     if (!isEditing) {
-      // Оновлення localStorage
       const updatedItem = {
         ...item,
         topic: editedTopic,
@@ -63,19 +62,19 @@ export default function InfoItem({ onDeleteItemId, item, onUpdateItemData }) {
               type="text"
               value={editedTopic}
               onChange={(e) => setEditedTopic(e.target.value)}
-              className="form-input"
+              className="form-input form-input-edit"
             />
             <input
               type="number"
               value={editedIncome}
               onChange={(e) => setEditedIncome(e.target.value)}
-              className="form-input"
+              className="form-input form-input-edit"
             />
             <input
               type="date"
               value={editedDate}
               onChange={(e) => setEditedDate(e.target.value)}
-              className="form-input"
+              className="form-input form-input-edit"
             />
           </>
         ) : (

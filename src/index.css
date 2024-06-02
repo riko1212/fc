@@ -339,6 +339,13 @@ address {
   color: #a8dba8;
 }
 
+.form-input.form-input-edit {
+  margin-bottom: 0;
+  border: 1px solid #3b8686;
+
+  color: #3b8686;
+}
+
 .footer {
   padding-top: 24px;
   padding-bottom: 24px;
