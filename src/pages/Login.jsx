@@ -1,6 +1,8 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Login() {
+  const navigate = useNavigate();
+
   const handleLogin = (e) => {
     e.preventDefault();
     const name = e.target.elements['login-name'].value;
@@ -11,7 +13,7 @@ function Login() {
     );
     if (foundUser) {
       localStorage.setItem('loggedInUser', JSON.stringify(foundUser));
-      history.push('/main');
+      navigate.push('/main');
     } else {
       alert("Неправильне ім'я користувача або пароль");
     }
