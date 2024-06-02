@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useNavigate } from 'react';
 import { Link } from 'react-router-dom';
 
 function Register() {
   const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -38,7 +39,7 @@ function Register() {
     users.push(newUser);
     localStorage.setItem('users', JSON.stringify(users));
 
-    window.location.href = '/fc';
+    navigate('/');
   };
 
   return (

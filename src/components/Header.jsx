@@ -1,10 +1,12 @@
+import { useNavigate } from 'react-router-dom';
 export default function Header() {
+  const navigate = useNavigate();
   const user = localStorage.getItem('loggedInUser');
 
   const userName = JSON.parse(user);
 
   const handleLogout = () => {
-    window.location.href = '/fc';
+    navigate('/');
   };
   return (
     <header className="header">
