@@ -19,6 +19,7 @@ export default function InfoList({
   isDeleteModalClose,
   onDeleteItemId,
   onClearModal,
+  onUpdateItemData,
 }) {
   const [sortBy, setSortBy] = useState('order');
 
@@ -60,6 +61,7 @@ export default function InfoList({
             onDeleteModalOpen={onDeleteModalOpen}
             isDeleteModalClose={isDeleteModalClose}
             onDeleteItemId={onDeleteItemId}
+            onUpdateItemData={onUpdateItemData}
           />
         ))}
       </ul>

@@ -29,12 +29,14 @@ function Login() {
             name="login-name"
             className="form-input"
             placeholder="Enter name"
+            required
           />
           <input
             type="password"
             name="login-pass"
             className="form-input"
             placeholder="Enter password"
+            required
           />
           <button type="submit" className="btn form-btn login-btn">
             Login

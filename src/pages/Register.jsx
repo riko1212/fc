@@ -35,9 +35,12 @@ function Register() {
       return;
     }
 
-    const newUser = { name, password };
+    const newUser = { id: Date.now(), name, password };
     users.push(newUser);
     localStorage.setItem('users', JSON.stringify(users));
+
+    // Зберігаємо ID користувача для майбутніх сесій
+    localStorage.setItem('currentUser', JSON.stringify(newUser));
 
     navigate('/');
   };

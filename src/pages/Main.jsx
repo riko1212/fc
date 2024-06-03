@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../index.css';
 
 import Sidebar from '../components/Sidebar';
@@ -10,35 +11,30 @@ import Footer from '../components/Footer';
 import TopicList from '../components/TopicList';
 import DeleteModal from '../components/DeleteModal';
 import ClearModal from '../components/ClearModal';
-// import UpdateModal from './UpdateModal';
 
 export default function Main() {
-  const [sum, setSum] = useState(function () {
-    const storeSum = localStorage.getItem('sum');
-    return JSON.parse(storeSum);
-  });
+  const navigate = useNavigate();
+  const currentUser = JSON.parse(localStorage.getItem('loggedInUser'));
 
-  // const [items, setItems] = useState(function () {
-  //   const storeItems = localStorage.getItem('items');
-  //   return JSON.parse(storeItems);
-  // });
+  useEffect(() => {
+    if (!currentUser) {
+      navigate('/login');
+    }
+  }, [currentUser, navigate]);
+
+  const [sum, setSum] = useState(() => {
+    const storeSum = localStorage.getItem(`sum_${currentUser.id}`);
+    return storeSum ? JSON.parse(storeSum) : 0;
+  });
 
   const [items, setItems] = useState(() => {
-    const storeItems = localStorage.getItem('items');
-    if (storeItems) {
-      return JSON.parse(storeItems);
-    } else {
-      return [];
-    }
+    const storeItems = localStorage.getItem(`items_${currentUser.id}`);
+    return storeItems ? JSON.parse(storeItems) : [];
   });
-
-  // const [items, setItems] = useState([]);
 
   const [isDeleteModalClose, setIsDeleteModalClose] = useState(true);
   const [isClearModalClose, setIsClearModalClose] = useState(true);
   const [itemIdToDelete, setItemIdToDelete] = useState(null);
-  // const [itemIdToUpdate, setitemIdToUpdate] = useState(null);
-  // const [itemToUpdate, setitemToUpdate] = useState({});
 
   function handleDeleteModalCloseClick() {
     if (items.length === 0) {
@@ -55,10 +51,7 @@ export default function Main() {
   }
 
   function handleChangeSum(data) {
-    setSum((sum) => {
-      let addSum = sum;
-      return (addSum += Number(data));
-    });
+    setSum((sum) => sum + Number(data));
   }
 
   function handleAddItems(item) {
@@ -74,27 +67,21 @@ export default function Main() {
     setIsClearModalClose(false);
   }
 
-  function handleUpdateItem() {
-    // setitemIdToUpdate(id);
-    // console.log(itemIdToUpdate);
-    // setitemToUpdate(items.find((item) => item.id === itemIdToUpdate));
-    // setisModalClose(false);
-  }
-
-  // function handleConfirmUpdate() {
-  //   console.log(123);
-  // }
-
   function handleConfirmDelete() {
     setItems(items.filter((item) => item.id !== itemIdToDelete));
     setSum(
       items
         .filter((item) => item.id !== itemIdToDelete)
-        .reduce((total, amount) => {
-          return total + Number(amount.income);
-        }, 0)
+        .reduce((total, amount) => total + Number(amount.income), 0)
     );
     setIsDeleteModalClose(true);
+  }
+
+  function handleUpdateItem() {
+    // setitemIdToUpdate(id);
+    // console.log(itemIdToUpdate);
+    // setitemToUpdate(items.find((item) => item.id === itemIdToUpdate));
+    // setisModalClose(false);
   }
 
   function handleClearList() {
@@ -103,19 +90,13 @@ export default function Main() {
     setIsClearModalClose(true);
   }
 
-  useEffect(
-    function () {
-      localStorage.setItem('items', JSON.stringify(items));
-    },
-    [items]
-  );
+  useEffect(() => {
+    localStorage.setItem(`items_${currentUser.id}`, JSON.stringify(items));
+  }, [items, currentUser.id]);
 
-  useEffect(
-    function () {
-      localStorage.setItem('sum', JSON.stringify(sum));
-    },
-    [sum]
-  );
+  useEffect(() => {
+    localStorage.setItem(`sum_${currentUser.id}`, JSON.stringify(sum));
+  }, [sum, currentUser.id]);
 
   return (
     <>
