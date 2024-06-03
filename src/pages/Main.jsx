@@ -148,13 +148,6 @@ export default function Main() {
         isDeleteModalClose={isDeleteModalClose}
         onItemDelete={handleConfirmDelete}
       />
-
-      {/* <UpdateModal
-        onModalClose={handleModalCloseClick}
-        isModalClose={isModalClose}
-        onUpdateList={handleConfirmUpdate}
-        itemToUpdate={itemToUpdate}
-      /> */}
       <ClearModal
         onClearModalClose={handleClearModalCloseClick}
         isClearModalClose={isClearModalClose}

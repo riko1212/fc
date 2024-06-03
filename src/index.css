@@ -163,6 +163,10 @@ address {
   align-items: center;
 }
 
+.add-category-btn.close::after {
+  transform: rotate(45deg);
+}
+
 .add-category-btn::after {
   content: '+';
   font-size: 36px;
@@ -173,10 +177,6 @@ address {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.add-category-btn.close::after {
-  content: 'x';
 }
 
 .form-add-category {
@@ -457,6 +457,12 @@ address {
 
 .login-link {
   color: #cff09e;
+}
+
+.back-btn {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .error-page-text {

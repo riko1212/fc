@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function RestorePass() {
   const navigate = useNavigate();
@@ -55,6 +55,9 @@ function RestorePass() {
           <button type="submit" className="btn form-btn">
             Restore Password
           </button>
+          <Link to="/" className="btn form-btn back-btn">
+            Back to Login
+          </Link>
         </form>
       </div>
     </div>
