@@ -10,7 +10,6 @@ export default function DeleteModal({
   onDeleteModalClose,
   isDeleteModalClose,
   onItemDelete,
-  // onUpdateList,
 }) {
   return (
     <div className={isDeleteModalClose ? 'backdrop clicked' : 'backdrop'}>

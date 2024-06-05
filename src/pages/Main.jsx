@@ -22,19 +22,49 @@ export default function Main() {
     }
   }, [currentUser, navigate]);
 
-  const [sum, setSum] = useState(() => {
-    const storeSum = localStorage.getItem(`sum_${currentUser.id}`);
-    return storeSum ? JSON.parse(storeSum) : 0;
+  const [categories, setCategories] = useState(() => {
+    const storedCategories = localStorage.getItem(
+      `categories_${currentUser.id}`
+    );
+    return storedCategories ? JSON.parse(storedCategories) : ['Default'];
   });
 
-  const [items, setItems] = useState(() => {
-    const storeItems = localStorage.getItem(`items_${currentUser.id}`);
-    return storeItems ? JSON.parse(storeItems) : [];
-  });
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
+  const [sum, setSum] = useState(0);
+  const [items, setItems] = useState([]);
+  const [quote, setQuote] = useState(null);
   const [isDeleteModalClose, setIsDeleteModalClose] = useState(true);
   const [isClearModalClose, setIsClearModalClose] = useState(true);
   const [itemIdToDelete, setItemIdToDelete] = useState(null);
+
+  useEffect(() => {
+    if (selectedCategory) {
+      const storeSum = localStorage.getItem(
+        `sum_${currentUser.id}_${selectedCategory}`
+      );
+      setSum(storeSum ? JSON.parse(storeSum) : 0);
+
+      const storeItems = localStorage.getItem(
+        `items_${currentUser.id}_${selectedCategory}`
+      );
+      setItems(storeItems ? JSON.parse(storeItems) : []);
+    }
+  }, [selectedCategory, currentUser.id]);
+
+  async function fetchQuote() {
+    try {
+      const response = await fetch('https://api.quotable.io/random');
+      const data = await response.json();
+      setQuote(data.content);
+    } catch (error) {
+      console.error('Error fetching quote:', error);
+    }
+  }
+
+  useEffect(() => {
+    fetchQuote();
+  }, []);
 
   function handleDeleteModalCloseClick() {
     if (items.length === 0) {
@@ -77,11 +107,11 @@ export default function Main() {
     setIsDeleteModalClose(true);
   }
 
-  function handleUpdateItem() {
-    // setitemIdToUpdate(id);
-    // console.log(itemIdToUpdate);
-    // setitemToUpdate(items.find((item) => item.id === itemIdToUpdate));
-    // setisModalClose(false);
+  function handleUpdateItemData(id, updatedItem) {
+    const updatedItems = items.map((item) =>
+      item.id === id ? updatedItem : item
+    );
+    setItems(updatedItems);
   }
 
   function handleClearList() {
@@ -90,36 +120,75 @@ export default function Main() {
     setIsClearModalClose(true);
   }
 
-  useEffect(() => {
-    localStorage.setItem(`items_${currentUser.id}`, JSON.stringify(items));
-  }, [items, currentUser.id]);
+  function handleCategoryChange(newCategory) {
+    setSelectedCategory(newCategory);
+  }
+
+  function handleAddCategory(newCategory) {
+    if (!categories.includes(newCategory)) {
+      const updatedCategories = [...categories, newCategory];
+      setCategories(updatedCategories);
+      localStorage.setItem(
+        `categories_${currentUser.id}`,
+        JSON.stringify(updatedCategories)
+      );
+      setSelectedCategory(newCategory);
+    }
+  }
 
   useEffect(() => {
-    localStorage.setItem(`sum_${currentUser.id}`, JSON.stringify(sum));
-  }, [sum, currentUser.id]);
+    if (selectedCategory) {
+      localStorage.setItem(
+        `items_${currentUser.id}_${selectedCategory}`,
+        JSON.stringify(items)
+      );
+      localStorage.setItem(
+        `sum_${currentUser.id}_${selectedCategory}`,
+        JSON.stringify(sum)
+      );
+    }
+  }, [items, sum, currentUser.id, selectedCategory]);
 
   return (
     <>
       <Header />
       <div className="page-wrap">
         <div className="container page-wrap-container">
-          <Sidebar>
-            <TopicList />
+          <Sidebar onCategorySelect={handleCategoryChange}>
+            <TopicList
+              categories={categories}
+              selectedCategory={selectedCategory}
+              onCategoryChange={handleCategoryChange}
+              onAddCategory={handleAddCategory}
+            />
           </Sidebar>
           <main className="main">
-            <Form onAddSum={handleChangeSum} onAddItems={handleAddItems} />
-            <Info sum={sum}>
-              <InfoList
-                items={items}
-                onDeleteItem={handleConfirmDelete}
-                onDeleteModalOpen={handleDeleteModalCloseClick}
-                isDeleteModalClose={isDeleteModalClose}
-                isClearModalClose={isClearModalClose}
-                onDeleteItemId={handleDeleteItem}
-                onUpdateItemData={handleUpdateItem}
-                onClearModal={handleClearModal}
-              />
-            </Info>
+            {!selectedCategory && quote && (
+              <div className="quote">
+                <p>{quote}</p>
+              </div>
+            )}
+            {selectedCategory && (
+              <>
+                <Form
+                  onAddSum={handleChangeSum}
+                  onAddItems={handleAddItems}
+                  selectedCategory={selectedCategory}
+                />
+                <Info sum={sum}>
+                  <InfoList
+                    items={items}
+                    onDeleteItem={handleConfirmDelete}
+                    onDeleteModalOpen={handleDeleteModalCloseClick}
+                    isDeleteModalClose={isDeleteModalClose}
+                    isClearModalClose={isClearModalClose}
+                    onDeleteItemId={handleDeleteItem}
+                    onUpdateItemData={handleUpdateItemData}
+                    onClearModal={handleClearModal}
+                  />
+                </Info>
+              </>
+            )}
           </main>
         </div>
       </div>

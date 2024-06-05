@@ -121,6 +121,7 @@ address {
 .sidebar {
   width: 300px;
   padding: 40px 20px;
+  flex-shrink: 0;
 }
 
 .sidebar-item:not(:last-child) {
@@ -138,6 +139,7 @@ address {
   transition-duration: 300ms;
   display: flex;
   justify-content: space-between;
+  cursor: pointer;
 }
 
 .sidebar-item-delete {
@@ -222,6 +224,31 @@ address {
   flex-grow: 1;
   height: 100%;
   padding: 40px;
+}
+
+.quote {
+  min-height: 25vh;
+  background-color: var(--color-two);
+  border-radius: 15px;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.quote p {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--color-one);
+}
+
+.quote p::before,
+.quote p::after {
+  content: '"';
+  font-size: 44px;
 }
 
 .form {

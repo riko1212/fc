@@ -1,18 +1,19 @@
 import { useState } from 'react';
-
 import TopicItem from './TopicItem';
 import PropTypes from 'prop-types';
 
 TopicList.propTypes = {
-  categories: PropTypes.array,
-  onDelete: PropTypes.func,
+  categories: PropTypes.array.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onSelect: PropTypes.func.isRequired,
 };
 
-export default function TopicList({ categories, onDelete }) {
+export default function TopicList({ categories, onDelete, onSelect }) {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
 
-  const handleTabClick = (index) => {
+  const handleTabClick = (index, category) => {
     setActiveTabIndex(index);
+    onSelect(category);
   };
 
   return (
@@ -22,8 +23,8 @@ export default function TopicList({ categories, onDelete }) {
           onDelete={onDelete}
           item={item}
           key={item.id}
-          onClick={() => handleTabClick(index)}
-          className={index === activeTabIndex ? 'active' : 'чцув'}
+          onClick={() => handleTabClick(index, item)}
+          className={index === activeTabIndex ? 'active' : ''}
         />
       ))}
     </ul>

@@ -4,11 +4,9 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 Sidebar.propTypes = {
-  children: PropTypes.object,
-  onCategorySelect: PropTypes.func,
+  children: PropTypes.node,
+  onCategorySelect: PropTypes.func.isRequired,
 };
-
-const LOCAL_STORAGE_KEY = 'categories';
 
 const topicList = [
   { id: 1, name: 'House' },
@@ -20,14 +18,21 @@ const topicList = [
 ];
 
 export default function Sidebar({ onCategorySelect }) {
+  const currentUser = JSON.parse(localStorage.getItem('loggedInUser'));
+
   const [categories, setCategories] = useState(() => {
-    const storedCategories = localStorage.getItem(LOCAL_STORAGE_KEY);
+    const storedCategories = localStorage.getItem(
+      `categories_${currentUser.id}`
+    );
     return storedCategories ? JSON.parse(storedCategories) : topicList;
   });
 
   useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(categories));
-  }, [categories]);
+    localStorage.setItem(
+      `categories_${currentUser.id}`,
+      JSON.stringify(categories)
+    );
+  }, [categories, currentUser.id]);
 
   const [showAddCategory, setShowAddCategory] = useState(false);
 
@@ -36,7 +41,8 @@ export default function Sidebar({ onCategorySelect }) {
   }
 
   function handleAddCategory(category) {
-    setCategories((prevCategories) => [...prevCategories, category]);
+    const newCategory = { id: Date.now(), name: category };
+    setCategories((prevCategories) => [...prevCategories, newCategory]);
     setShowAddCategory(false);
   }
 
@@ -47,8 +53,9 @@ export default function Sidebar({ onCategorySelect }) {
   }
 
   function handleCategorySelect(category) {
-    onCategorySelect(category);
+    onCategorySelect(category.name);
   }
+
   return (
     <aside className="sidebar">
       <TopicList

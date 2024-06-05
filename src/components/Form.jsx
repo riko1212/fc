@@ -2,11 +2,12 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 Form.propTypes = {
-  onAddSum: PropTypes.func,
-  onAddItems: PropTypes.func,
+  onAddSum: PropTypes.func.isRequired,
+  onAddItems: PropTypes.func.isRequired,
+  selectedCategory: PropTypes.string.isRequired,
 };
 
-export default function Form({ onAddSum, onAddItems }) {
+export default function Form({ onAddSum, onAddItems, selectedCategory }) {
   const [income, setIncome] = useState('');
   const [topic, setTopic] = useState('');
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
@@ -16,7 +17,13 @@ export default function Form({ onAddSum, onAddItems }) {
 
     if (!income || !topic) return;
 
-    const result = { income, topic, date, id: Date.now() };
+    const result = {
+      income,
+      topic,
+      date,
+      id: Date.now(),
+      category: selectedCategory,
+    };
 
     onAddSum(result.income);
     onAddItems(result);
