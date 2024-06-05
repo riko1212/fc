@@ -40,8 +40,7 @@ export default function Sidebar({ onCategorySelect }) {
     setShowAddCategory((show) => !show);
   }
 
-  function handleAddCategory(category) {
-    const newCategory = { id: Date.now(), name: category };
+  function handleAddCategory(newCategory) {
     setCategories((prevCategories) => [...prevCategories, newCategory]);
     setShowAddCategory(false);
   }

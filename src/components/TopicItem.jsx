@@ -1,28 +1,27 @@
 import PropTypes from 'prop-types';
 
 TopicItem.propTypes = {
-  item: PropTypes.object.isRequired,
-  onDelete: PropTypes.func.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onDelete: PropTypes.func,
   className: PropTypes.string,
+  category: PropTypes.object,
+  onSelect: PropTypes.func,
+  key: PropTypes.number,
 };
 
-export default function TopicItem({ item, onDelete, onClick, className }) {
-  const handleDelete = () => {
-    onDelete(item);
-  };
-
+export default function TopicItem({
+  key,
+  onDelete,
+  onSelect,
+  category,
+  className,
+}) {
   return (
-    <li className={`sidebar-item ${className}`} onClick={onClick}>
-      <div className="sidebar-link">
-        {item.name}
+    <li key={key} className={`sidebar-item ${className}`}>
+      <div className="sidebar-link" onClick={() => onSelect(category)}>
+        <span>{category.name}</span>
         <button
-          type="button"
+          onClick={() => onDelete(category)}
           className="sidebar-item-delete"
-          onClick={(e) => {
-            e.stopPropagation();
-            handleDelete();
-          }}
         >
           +
         </button>

@@ -1,14 +1,13 @@
 import { useState } from 'react';
-import Button from './Button';
-
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 FormAddCategory.propTypes = {
   onAddCategory: PropTypes.func,
-}
+};
 
 export default function FormAddCategory({ onAddCategory }) {
   const [categoryName, setCategoryName] = useState('');
+
   function handleSubmit(e) {
     e.preventDefault();
     if (!categoryName) return;
@@ -20,6 +19,7 @@ export default function FormAddCategory({ onAddCategory }) {
     onAddCategory(newCategory);
     setCategoryName('');
   }
+
   return (
     <form className="form-add-category" onSubmit={handleSubmit}>
       <label htmlFor="add-category" className="add-category-text">
@@ -31,10 +31,9 @@ export default function FormAddCategory({ onAddCategory }) {
         value={categoryName}
         onChange={(e) => setCategoryName(e.target.value)}
       ></input>
-      {/* <button type="submit" className="submit-category btn">
+      <button type="submit" className="submit-category btn">
         Add
-      </button> */}
-      <Button className="submit-category">Add</Button>
+      </button>
     </form>
   );
 }
