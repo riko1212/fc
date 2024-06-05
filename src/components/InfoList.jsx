@@ -14,7 +14,7 @@ InfoList.propTypes = {
 };
 
 export default function InfoList({
-  items,
+  items = [],
   onDeleteModalOpen,
   isDeleteModalClose,
   onDeleteItemId,
@@ -23,32 +23,30 @@ export default function InfoList({
 }) {
   const [sortBy, setSortBy] = useState('order');
 
-  let sortedItems;
+  let sortedItems = [];
 
-  switch (sortBy) {
-    case 'description':
-      sortedItems = items
-        .slice()
-        .sort((a, b) => a.topic.localeCompare(b.topic));
-      break;
-    case 'highest':
-      sortedItems = items.slice().sort((a, b) => b.income - a.income);
-      break;
-    case 'lowest':
-      sortedItems = items.slice().sort((a, b) => a.income - b.income);
-      break;
-    case 'first':
-      sortedItems = items
-        .slice()
-        .sort((a, b) => new Date(a.date) - new Date(b.date));
-      break;
-    case 'last':
-      sortedItems = items
-        .slice()
-        .sort((a, b) => new Date(b.date) - new Date(a.date));
-      break;
-    default:
-      sortedItems = items;
+  if (items && items.length > 0) {
+    sortedItems = [...items]; // Create a copy of items
+
+    switch (sortBy) {
+      case 'description':
+        sortedItems.sort((a, b) => a.topic.localeCompare(b.topic));
+        break;
+      case 'highest':
+        sortedItems.sort((a, b) => b.income - a.income);
+        break;
+      case 'lowest':
+        sortedItems.sort((a, b) => a.income - b.income);
+        break;
+      case 'first':
+        sortedItems.sort((a, b) => new Date(a.date) - new Date(b.date));
+        break;
+      case 'last':
+        sortedItems.sort((a, b) => new Date(b.date) - new Date(a.date));
+        break;
+      default:
+        break;
+    }
   }
 
   return (

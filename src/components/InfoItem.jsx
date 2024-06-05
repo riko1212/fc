@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 InfoItem.propTypes = {
   onDeleteItemId: PropTypes.func,
   onUpdateItemData: PropTypes.func,
-  item: PropTypes.object,
+  item: PropTypes.object.isRequired,
 };
 
 export default function InfoItem({ onDeleteItemId, item, onUpdateItemData }) {
@@ -46,8 +46,9 @@ export default function InfoItem({ onDeleteItemId, item, onUpdateItemData }) {
         income: editedIncome,
         date: new Date(editedDate).getTime(),
       };
-      const updatedItems = JSON.parse(localStorage.getItem('items')).map(
-        (oldItem) => (oldItem.id === item.id ? updatedItem : oldItem)
+      const storedItems = JSON.parse(localStorage.getItem('items')) || [];
+      const updatedItems = storedItems.map((oldItem) =>
+        oldItem.id === item.id ? updatedItem : oldItem
       );
       localStorage.setItem('items', JSON.stringify(updatedItems));
     }
