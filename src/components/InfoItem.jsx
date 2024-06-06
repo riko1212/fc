@@ -52,7 +52,7 @@ export default function InfoItem({ onDeleteItemId, item, onUpdateItemData }) {
       );
       localStorage.setItem('items', JSON.stringify(updatedItems));
     }
-  }, [isEditing, editedTopic, editedIncome, editedDate]);
+  }, [item, isEditing, editedTopic, editedIncome, editedDate]);
 
   return (
     <li className="info-item">

@@ -97,6 +97,26 @@ address {
   background-color: var(--color-three);
 }
 
+.greet-text {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--color-four);
+}
+
+.greet-text span {
+  color: var(--color-one);
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--color-four);
+}
+
+.logo span {
+  color: var(--color-one);
+}
+
 .header-container {
   display: flex;
   justify-content: space-between;
@@ -115,6 +135,12 @@ address {
 }
 
 .logout-btn {
+  background-color: var(--color-four);
+  color: var(--color-one);
+}
+
+.logout-btn:hover,
+.logout-btn:focus {
   background-color: var(--color-two);
 }
 
@@ -391,6 +417,15 @@ address {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.contacts-item:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+.contacts-link {
+  color: var(--color-four);
+  font-weight: bold;
 }
 
 .backdrop {

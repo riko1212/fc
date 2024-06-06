@@ -136,8 +136,14 @@ export default function Main() {
     }
   }
 
+  function handleCategoryDelete() {
+    setSelectedCategory(null);
+    fetchQuote();
+  }
+
   useEffect(() => {
     if (selectedCategory) {
+      console.log(selectedCategory);
       localStorage.setItem(
         `items_${currentUser.id}_${selectedCategory}`,
         JSON.stringify(items)
@@ -154,7 +160,10 @@ export default function Main() {
       <Header />
       <div className="page-wrap">
         <div className="container page-wrap-container">
-          <Sidebar onCategorySelect={handleCategoryChange}>
+          <Sidebar
+            onCategorySelect={handleCategoryChange}
+            onCategoryDelete={handleCategoryDelete}
+          >
             <TopicList
               categories={categories}
               selectedCategory={selectedCategory}
@@ -163,7 +172,7 @@ export default function Main() {
             />
           </Sidebar>
           <main className="main">
-            {!selectedCategory && quote && (
+            {selectedCategory === null && quote && (
               <div className="quote">
                 <p>{quote}</p>
               </div>

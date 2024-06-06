@@ -26,7 +26,7 @@ export default function InfoList({
   let sortedItems = [];
 
   if (items && items.length > 0) {
-    sortedItems = [...items]; // Create a copy of items
+    sortedItems = [...items];
 
     switch (sortBy) {
       case 'description':

@@ -10,9 +10,15 @@ TopicList.propTypes = {
   ).isRequired,
   onDelete: PropTypes.func,
   onSelect: PropTypes.func,
+  selectedCategory: PropTypes.string,
 };
 
-export default function TopicList({ categories, onDelete, onSelect }) {
+export default function TopicList({
+  categories,
+  onDelete,
+  onSelect,
+  selectedCategory,
+}) {
   return (
     <ul className="sidebar-list">
       {categories.map((category) => (
@@ -21,6 +27,7 @@ export default function TopicList({ categories, onDelete, onSelect }) {
           key={category.id}
           category={category}
           onSelect={onSelect}
+          selectedCategory={selectedCategory}
         />
       ))}
     </ul>

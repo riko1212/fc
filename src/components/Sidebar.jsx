@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 Sidebar.propTypes = {
   children: PropTypes.node,
   onCategorySelect: PropTypes.func.isRequired,
+  onCategoryDelete: PropTypes.func.isRequired,
+  selectedCategory: PropTypes.string,
 };
 
 const topicList = [
@@ -17,7 +19,11 @@ const topicList = [
   { id: 6, name: 'Health' },
 ];
 
-export default function Sidebar({ onCategorySelect }) {
+export default function Sidebar({
+  onCategorySelect,
+  onCategoryDelete,
+  selectedCategory,
+}) {
   const currentUser = JSON.parse(localStorage.getItem('loggedInUser'));
 
   const [categories, setCategories] = useState(() => {
@@ -46,9 +52,15 @@ export default function Sidebar({ onCategorySelect }) {
   }
 
   function handleDeleteCategory(categoryToDelete) {
-    setCategories((prevCategories) =>
-      prevCategories.filter((category) => category.id !== categoryToDelete.id)
+    const updatedCategories = categories.filter(
+      (category) => category.id !== categoryToDelete.id
     );
+    setCategories(updatedCategories);
+
+    localStorage.removeItem(`items_${currentUser.id}_${categoryToDelete.name}`);
+    localStorage.removeItem(`sum_${currentUser.id}_${categoryToDelete.name}`);
+
+    onCategoryDelete();
   }
 
   function handleCategorySelect(category) {
@@ -61,6 +73,7 @@ export default function Sidebar({ onCategorySelect }) {
         categories={categories}
         onDelete={handleDeleteCategory}
         onSelect={handleCategorySelect}
+        selectedCategory={selectedCategory}
       />
       {showAddCategory && <FormAddCategory onAddCategory={handleAddCategory} />}
       <button

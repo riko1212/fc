@@ -11,15 +11,17 @@ export default function Header() {
   return (
     <header className="header">
       <div className="container header-container">
-        <a href="/#/main" className="header-logo">
-          Logo
+        <a href="/#/main" className="header-logo logo">
+          Family<span>Cents</span>
         </a>
         <nav className="header-nav">
           {/* <ul className="menu-list">
             <li className="menu-item">statistic</li>
             <li className="menu-item">history</li>
           </ul> */}
-          <p className="greet-text">Welcome, {userName.name}!</p>
+          <p className="greet-text">
+            Welcome, <span>{userName.name}</span>!
+          </p>
           <button
             type="button"
             className="logout-btn btn"

@@ -2,25 +2,32 @@ import PropTypes from 'prop-types';
 
 TopicItem.propTypes = {
   onDelete: PropTypes.func,
-  className: PropTypes.string,
   category: PropTypes.object,
   onSelect: PropTypes.func,
-  key: PropTypes.number,
+  selectedCategory: PropTypes.string,
 };
 
 export default function TopicItem({
-  key,
   onDelete,
   onSelect,
   category,
-  className,
+  selectedCategory,
 }) {
   return (
-    <li key={key} className={`sidebar-item ${className}`}>
+    <li
+      className={
+        selectedCategory === category.name
+          ? 'sidebar-item selected'
+          : 'sidebar-item'
+      }
+    >
       <div className="sidebar-link" onClick={() => onSelect(category)}>
         <span>{category.name}</span>
         <button
-          onClick={() => onDelete(category)}
+          onClick={(e) => {
+            e.stopPropagation();
+            onDelete(category);
+          }}
           className="sidebar-item-delete"
         >
           +
