@@ -143,7 +143,6 @@ export default function Main() {
 
   useEffect(() => {
     if (selectedCategory) {
-      console.log(selectedCategory);
       localStorage.setItem(
         `items_${currentUser.id}_${selectedCategory}`,
         JSON.stringify(items)
@@ -163,6 +162,7 @@ export default function Main() {
           <Sidebar
             onCategorySelect={handleCategoryChange}
             onCategoryDelete={handleCategoryDelete}
+            selectedCategory={selectedCategory}
           >
             <TopicList
               categories={categories}
@@ -184,7 +184,7 @@ export default function Main() {
                   onAddItems={handleAddItems}
                   selectedCategory={selectedCategory}
                 />
-                <Info sum={sum}>
+                <Info sum={sum} selectedCategory={selectedCategory}>
                   <InfoList
                     items={items}
                     onDeleteItem={handleConfirmDelete}
