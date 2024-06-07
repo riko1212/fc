@@ -34,7 +34,14 @@ export default function InfoItem({ onDeleteItemId, item, onUpdateItemData }) {
   }
 
   function handleSave() {
-    onUpdateItemData(item.id, editedTopic, editedIncome, editedDate);
+    const updatedItem = {
+      ...item,
+      topic: editedTopic,
+      income: editedIncome,
+      date: new Date(editedDate).getTime(),
+    };
+
+    onUpdateItemData(item.id, updatedItem);
     setIsEditing(false);
   }
 
@@ -52,7 +59,7 @@ export default function InfoItem({ onDeleteItemId, item, onUpdateItemData }) {
       );
       localStorage.setItem('items', JSON.stringify(updatedItems));
     }
-  }, [item, isEditing, editedTopic, editedIncome, editedDate]);
+  }, [isEditing]);
 
   return (
     <li className="info-item">
