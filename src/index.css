@@ -77,7 +77,8 @@ address {
 .btn:hover,
 .btn:active,
 .btn:focus {
-  background-color: var(--color-two);
+  background-color: rgb(240, 99, 48);
+  color: var(--color-one);
 }
 
 .page-wrap {
@@ -152,6 +153,10 @@ address {
 
 .sidebar-item:not(:last-child) {
   margin-bottom: 8px;
+}
+
+.sidebar-item.selected .sidebar-link {
+  background-color: rgb(240, 99, 48);
 }
 
 .sidebar-link {
