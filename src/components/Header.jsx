@@ -11,7 +11,7 @@ export default function Header() {
   return (
     <header className="header">
       <div className="container header-container">
-        <a href="/#/main" className="header-logo logo">
+        <a href="/fc/#/main" className="header-logo logo">
           Family<span>Cents</span>
         </a>
         <nav className="header-nav">
